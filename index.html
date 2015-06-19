@@ -34,8 +34,52 @@
 			document.getElementById("NowEventCountDown").innerHTML=d+"天"+h+"时"+m+"分"+s+"秒";
 			
 			// 3. 根据名称判断，该任务可持续多长时间
+			var backSecond = 25 * 60;
+			switch (nowEventName)
+			{
+				case "编码/写作":
+					{
+					}
+					break;
+				case "需求分析/写提纲":
+					{
+					}
+					break;
+				case "上网休息看视频":
+					{
+						backSecond = 5 * 60;
+					}
+					break;
+				case "阅读":
+					{
+					}
+					break;
+				case "画画":
+					{
+					}
+					break;
+				case "睡觉":
+					{
+						backSecond = 24 * 60 * 60;
+					}
+					break;
+				case "吃饭":
+					{
+						backSecond = 2 * 60 * 60;
+					}
+					break;
+				case "聊天/出门玩":
+					{
+						backSecond = 24 * 60 * 60;
+					}
+					break;
+			}
 			
 			// 4. 任务到期，弹框提示
+			if (leftsecond > backSecond)
+			{
+				alert("任务到期，请切换。");
+			}
         }
 
         window.onload = function() {Refresh();}
@@ -49,11 +93,13 @@
 			<div class="container">
 				<div class="navbar-header">
 				  <a href="./index" class="navbar-brand">Step Psth</a>
+				  <!--
 				  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				  </button>
+				  -->
 				</div>
 				<div class="navbar-collapse collapse" id="navbar-main">
 				<ul class="nav navbar-nav">
@@ -69,12 +115,8 @@
 		<div class="container">
             <h1>
                 {{with .NowStep}}
-                    <div id="NowEventName">
-						{{.EventTypeName}}
-					</div>
-					<div id="NowEventStartTime">
-						{{.StartTime}}
-					</div>
+                    <div id="NowEventName">{{.EventTypeName}}</div>
+					<div id="NowEventStartTime" style="visibility:hidden;">{{.StartTime}}</div>
 					<div id="NowEventCountDown"></div>					
                 {{end}}
             </h1>
@@ -91,7 +133,7 @@
 					{{range .PsthList}}
 					<tr>
 						<td>『{{.EventTypeName}}』</td>
-						<td>{{.LastTime}} 分钟 </td> 
+						<td>{{.LastTime}} </td> 
 						<!-- <td>{{.StartTime}}</td>
 						<td>{{.EndTime}}</td> -->
 					</tr>
@@ -100,4 +142,5 @@
 			</table>
 		</div>
     </body>
+	
 </html>
