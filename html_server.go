@@ -78,7 +78,7 @@ var em Step.EventManage
 
 func main() {
 	HtmlServer := http.FileServer(http.Dir("."))
-	http.Handle("/", HtmlServer)
+    http.Handle("/", HtmlServer)
 	//http.HandleFunc("/test", testFun)
 
 	var szFileName = "./db.xml"
@@ -127,6 +127,7 @@ func ShowAll(w http.ResponseWriter) {
 
 	err = t.Execute(w, v)
 	CheckErr(err)
+
 }
 
 /*func ShowAllType(w http.ResponseWriter) {
