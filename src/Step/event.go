@@ -1,53 +1,68 @@
 package Step
 
 import (
-    "fmt"
-    "encoding/xml"
-    "io/ioutil"
+	"KLog"
+	"encoding/json"
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
 )
 
 type Event struct {
-    TypeId      int     `xml:"type_id"`
-    TypeName    string  `xml:"type_name"`
-    TypeIcon    string  `xml:"type_icon"`
+	TypeId        int    `xml:"type_id" json:"type_id"`
+	TypeName      string `xml:"type_name" json:"type_name"`
+	TypeIcon      string `xml:"type_icon" json:"type_icon"`
+	RecommendTime int    `xml:"type_recommend_time" json:"type_recommend_time"`
 }
 
 type EventManage struct {
-    EventList   []Event `xml:"event_list"`
+	EventList []Event `xml:"event_list" json:"event_list"`
 }
 
-func (e *EventManage)LoadFromFile(){
-    buf, err := ioutil.ReadFile("./event.xml")
-    if len(buf) == 0 {
-        return
-    }
+func (e *EventManage) ToJson() []byte {
+	buf, err := json.Marshal(e)
 
-    CheckErr(err)
+	KLog.CheckErr(err)
 
-    err = xml.Unmarshal(buf, &e)
-
-    CheckErr(err)
+	return buf
 }
 
-func (e *EventManage) GetEventInfoByType(nTypId int) (*Event){
-    for _, v := range e.EventList {
-        if nTypId == v.TypeId {
-            return &v
-        }
-    }
+func (e *EventManage) LoadFromFile() {
+	buf, err := ioutil.ReadFile("./event.xml")
+	if len(buf) == 0 {
+		return
+	}
 
-    return nil
+	KLog.CheckErr(err)
+
+	err = xml.Unmarshal(buf, &e)
+
+	KLog.CheckErr(err)
 }
 
-func CheckErr(err error) {
-    if err != nil {
-        fmt.Println("err: ", err);
-    }
+func (e *EventManage) GetEventInfoByType(nTypId int) *Event {
+	for _, v := range e.EventList {
+		if nTypId == v.TypeId {
+			return &v
+		}
+	}
+
+	return nil
 }
 
-func EventTest(){
-    var em EventManage;
-    em.LoadFromFile();
+func (e *EventManage) GetRecommendTimeByType(nTypeId int) int {
+	for _, v := range e.EventList {
+		if nTypeId == v.TypeId {
+			return v.RecommendTime
+		}
+	}
 
-    fmt.Println(em.EventList);
+	return 0
+}
+
+func EventTest() {
+	var em EventManage
+	em.LoadFromFile()
+
+	fmt.Println(em.EventList)
 }
