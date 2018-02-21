@@ -50,7 +50,8 @@ func (p *PlayerPsth) AddStep(nTypeId int) {
 
 	// 自动将最后一个设置为当前结束
 	if i > 0 {
-		p.PsthList[i-1].EndTime = now
+		p.PsthList[i-1].EndTime, _ = time.Parse("2006/1/2 15:04:05", now.Format("2006/1/2 15:04:05"))
+		PlayerInfoInstace.InsertStep(&p.PsthList[i-1])
 	}
 
 	p.PsthList = append(p.PsthList, newPsth)

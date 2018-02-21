@@ -19,11 +19,11 @@ func (s *Step) UpdateTime(StartTime string, EndTime string) {
 
 	t, err := time.Parse("2006-01-02 15:04:05", StartTime)
 	KLog.CheckErr(err)
-	fmt.Println("start", t, s.StartTime)
+	KLog.Log("Start Time: %s", t)
 	s.StartTime = t
 
 	t, err = time.Parse("2006-01-02 15:04:05", EndTime)
 	KLog.CheckErr(err)
-	fmt.Println("start", t, s.EndTime)
+	KLog.Log("End Time: %s", t)
 	s.EndTime = t
 }

@@ -27,21 +27,29 @@ func main() {
 	http.HandleFunc("/update_step_time", updateStepTime)
 	http.HandleFunc("/delete_step", deleteStep)
 
+	http.HandleFunc("/player_info", getPlayerInfo)
+
 	err := http.ListenAndServe(":8000", nil)
 	CheckErr(err)
 }
 
 func getAllEventType(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("getAllEventType")
+	KLog.Log("getAllEventType")
 	fmt.Fprintf(w, "%q", StepManager.GetAllEventTypeJsonView())
 }
 
 func getAllEvent(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("getAllEvent")
+	KLog.Log("getAllEvent")
 
 	buf, err := StepManager.GetAllEventJsonView()
-	CheckErr(err)
+	KLog.CheckErr(err)
 	fmt.Fprintf(w, "%q", buf)
+}
+
+func getPlayerInfo(w http.ResponseWriter, r *http.Request) {
+	KLog.Log("getPlayerInfo")
+
+	fmt.Fprintf(w, "%q", StepManager.GetPlayerInfoJsonView())
 }
 
 func beginEvent(w http.ResponseWriter, r *http.Request) {

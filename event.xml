@@ -1,13 +1,13 @@
 <EventManage>
     <event_list>
         <type_id>1</type_id>
-        <type_name>编码/写作</type_name>
+        <type_name>编码</type_name>
         <type_icon>test_icon-1</type_icon>
         <type_recommend_time>25</type_recommend_time>
     </event_list>
     <event_list>
         <type_id>2</type_id>
-        <type_name>需求分析/写提纲</type_name>
+        <type_name>需求分析</type_name>
         <type_icon>test_icon-2</type_icon>
         <type_recommend_time>25</type_recommend_time>
     </event_list>
@@ -43,13 +43,19 @@
     </event_list>
     <event_list>
         <type_id>8</type_id>
-        <type_name>聊天/出门玩</type_name>
+        <type_name>出门</type_name>
         <type_icon>test_icon</type_icon>
         <type_recommend_time>45</type_recommend_time>
     </event_list>
     <event_list>
         <type_id>9</type_id>
         <type_name>对接外部</type_name>
+        <type_icon>test_icon</type_icon>
+        <type_recommend_time>15</type_recommend_time>
+    </event_list>
+    <event_list>
+        <type_id>10</type_id>
+        <type_name>对内沟通</type_name>
         <type_icon>test_icon</type_icon>
         <type_recommend_time>15</type_recommend_time>
     </event_list>

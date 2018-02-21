@@ -10,6 +10,7 @@ import (
 
 var EventManagerInstance EventManage
 var PlayerPsthInstance PlayerPsth
+var PlayerInfoInstace PlayerInfo
 
 type Manager struct {
 }
@@ -18,6 +19,7 @@ func (m *Manager) Init() {
 	var szFileName = "./db.xml"
 	PlayerPsthInstance.LoadFromFile(szFileName)
 	EventManagerInstance.LoadFromFile()
+	PlayerInfoInstace.Init()
 }
 
 func (m *Manager) GetAllEventTypeJsonView() []byte {
@@ -30,6 +32,10 @@ func (m *Manager) GetAllEventJsonView() ([]byte, error) {
 	buf, err := json.Marshal(v.PsthList)
 	KLog.CheckErr(err)
 	return buf, err
+}
+
+func (m *Manager) GetPlayerInfoJsonView() []byte {
+	return PlayerInfoInstace.ToJson()
 }
 
 func (m *Manager) ShowHtml(w http.ResponseWriter) {
